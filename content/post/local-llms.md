@@ -14,12 +14,12 @@ I wrote this guide for a friend interested in running large language models loca
 
 The architecture and weights of leading state of the art (SotA) large language models like GPT-4, Claude 2, and Bard are trade secrets of several competitive AI firms. Meta, however, has embraced open research – in February 2023, they began allowing researchers to apply for and access [LLaMA](https://ai.meta.com/blog/large-language-model-llama-meta-ai/), a powerful foundational LLM. Although other open-source LLMs were available prior to this release, LLaMA was a massive leap in open-source LLM performance. Within a week, the LLaMA weights were leaked on 4chan, setting off a wave of public LLM research. Researchers, companies, and individuals began releasing finetuned, quantized, and otherwise customized models built on top of LLaMA. Some early examples:
 
-| Model | Description |
-| --- | --- |
-| [Alpaca](https://github.com/tatsu-lab/stanford_alpaca) | Stanford researchers released one of the first LLaMA models, which was finetuned to follow instructions. |
-| [Vicuna](https://github.com/lm-sys/FastChat) | [LMSYS](https://lmsys.org/) released Vicuna, a model optimized for chat. |
-| [Guanaco](https://arxiv.org/abs/2305.14314) | Tim Dettmers and colleagues at the University of Washington developed QLoRA, "an efficient finetuning approach that reduces memory usage enough to finetune a 65B parameter model on a single 48GB GPU while preserving full 16-bit finetuning task performance." Guanaco is a chat-optimized model released alongside and built with this research. |
-| [WizardLM](https://arxiv.org/abs/2304.12244) | Researchers from Microsoft and Peking University developed Evol-Instruct, an approach for generating complex instruction datasets without human labeling. WizardLM is built for complex reasoning tasks and was released alongside this research. |
+| Model                                                  | Description                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Alpaca](https://github.com/tatsu-lab/stanford_alpaca) | Stanford researchers released one of the first LLaMA models, which was finetuned to follow instructions.                                                                                                                                                                                                                                             |
+| [Vicuna](https://github.com/lm-sys/FastChat)           | [LMSYS](https://lmsys.org/) released Vicuna, a model optimized for chat.                                                                                                                                                                                                                                                                             |
+| [Guanaco](https://arxiv.org/abs/2305.14314)            | Tim Dettmers and colleagues at the University of Washington developed QLoRA, "an efficient finetuning approach that reduces memory usage enough to finetune a 65B parameter model on a single 48GB GPU while preserving full 16-bit finetuning task performance." Guanaco is a chat-optimized model released alongside and built with this research. |
+| [WizardLM](https://arxiv.org/abs/2304.12244)           | Researchers from Microsoft and Peking University developed Evol-Instruct, an approach for generating complex instruction datasets without human labeling. WizardLM is built for complex reasoning tasks and was released alongside this research.                                                                                                    |
 
 The open-source community quickly began experimenting with these models, building task-optimized models with further finetuning, experimental combinations of models, and infrastructure to experiment with and deploy them. New open-source foundational models were released in the following months: of note, MosaicML's [MPT](https://www.mosaicml.com/blog/mpt-7b) series and the [Falcon LLM](https://falconllm.tii.ae/falcon.html) series.
 
@@ -61,7 +61,7 @@ If you're installing without virtualenv, just run `pip -r requirements.txt` from
 virtualenv venv
 # Activate the virtual environment on this shell.
 # You'll need to run this command every time you want to enter the virtual environment.
-source venv/bin/activate 
+source venv/bin/activate
 # Further commands are run in the virtual environment
 pip install -r requirements.txt
 ```
@@ -111,9 +111,8 @@ llama.cpp comes with a utility to quantize models. To quantize our ggml model to
 
 Once the quantization is complete, you should have a new model at `models/airoboros-l2-13b-gpt4-2.0/ggml-model-Q8_0.gguf`. This is what we'll be using for inference. `Q8_0` is the type of quantization we're using (8-bit). Here's a comparison of the available quantization methods in llama.cpp:
 
-
-| Model | Measure      | F16    | Q4_0   | Q4_1   | Q5_0   | Q5_1   | Q8_0   |
-|------:|--------------|-------:|-------:|-------:|-------:|-------:|-------:|
+| Model | Measure      |    F16 |   Q4_0 |   Q4_1 |   Q5_0 |   Q5_1 |   Q8_0 |
+| ----: | ------------ | -----: | -----: | -----: | -----: | -----: | -----: |
 |    7B | perplexity   | 5.9066 | 6.1565 | 6.0912 | 5.9862 | 5.9481 | 5.9070 |
 |    7B | file size    |  13.0G |   3.5G |   3.9G |   4.3G |   4.7G |   6.7G |
 |    7B | ms/tok @ 4th |    127 |     55 |     54 |     76 |     83 |     72 |
@@ -125,7 +124,7 @@ Once the quantization is complete, you should have a new model at `models/airobo
 |   13B | ms/tok @ 8th |      - |     73 |     82 |     98 |    105 |    128 |
 |   13B | bits/weight  |   16.0 |    4.5 |    5.0 |    5.5 |    6.0 |    8.5 |
 
-In general, 8-bit quantization maintains similar performance to the full 16-bit weights while cutting the file size in half and significantly improving inference speed. 
+In general, 8-bit quantization maintains similar performance to the full 16-bit weights while cutting the file size in half and significantly improving inference speed.
 
 ### Inference
 
@@ -148,13 +147,13 @@ To run inference with this prompt, I can use the command:
 
 llama.cpp will begin by loading the model into RAM (which may take some time) and then inference will begin. Here was the output from my the 8-bit quantized `airoboros-12-13b-gpt4-2.0` model:
 
-> *Sure! Imagine you're trying to learn how to draw a picture. You might start by drawing a line, then based on what that line looks like, you adjust where you put the next one. Maybe your first line was too high, so you move the second line lower. Or maybe it was too low, so you move it higher.*
-> 
-> *Now let's say instead of drawing a picture, we're trying to solve a math problem. The "line" is like an answer or solution we guessed for part of the problem. But unlike a picture, we can't just look at our work and decide if it's correct - we have to check with the teacher (which in this case is the computer).*
-> 
-> *The teacher might say, "Your line is too far to the left. Move it more towards the middle." This is like telling us to move our next line higher or lower depending on where the first one was.*
-> 
-> *So, we take our guess for the next part of the problem and adjust it based on what the teacher (computer) tells us. We keep doing this over and over until finally, after lots of tries, we get it right! And that's how stochastic gradient descent helps machines learn. [end of text]*
+> _Sure! Imagine you're trying to learn how to draw a picture. You might start by drawing a line, then based on what that line looks like, you adjust where you put the next one. Maybe your first line was too high, so you move the second line lower. Or maybe it was too low, so you move it higher._
+>
+> _Now let's say instead of drawing a picture, we're trying to solve a math problem. The "line" is like an answer or solution we guessed for part of the problem. But unlike a picture, we can't just look at our work and decide if it's correct - we have to check with the teacher (which in this case is the computer)._
+>
+> _The teacher might say, "Your line is too far to the left. Move it more towards the middle." This is like telling us to move our next line higher or lower depending on where the first one was._
+>
+> _So, we take our guess for the next part of the problem and adjust it based on what the teacher (computer) tells us. We keep doing this over and over until finally, after lots of tries, we get it right! And that's how stochastic gradient descent helps machines learn. [end of text]_
 
 llama.cpp will write the result to a log file with more information about the run.
 

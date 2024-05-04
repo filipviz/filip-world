@@ -14,11 +14,11 @@ Juicebox v4 introduces the [`BPSucker`](https://github.com/bananapus/nana-sucker
 
 `BPSucker` contracts are deployed in pairs, with one on each network being bridged to or from – for now, suckers bridge between Ethereum mainnet and a specific L2. The basic [`BPSucker`](https://github.com/Bananapus/nana-suckers/blob/master/src/BPSucker.sol) contract implements core sucker logic, and is extended by network-specific suckers with custom logic for each L2's bridging solution:
 
-| Sucker | Networks | Description |
-| --- | --- | --- |
+| Sucker                                                                                               | Networks                      | Description                                                                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`BPOptimismSucker`](https://github.com/Bananapus/nana-suckers/blob/master/src/BPOptimismSucker.sol) | Ethereum Mainnet and Optimism | Uses the [OP Standard Bridge](https://docs.optimism.io/builders/app-developers/bridging/standard-bridge) and the [OP Messenger](https://docs.optimism.io/builders/app-developers/bridging/messaging) |
-| [`BPBaseSucker`](https://github.com/Bananapus/nana-suckers/blob/master/src/BPBaseSucker.sol) | Ethereum Mainnet and Base | A thin wrapper around `BPOptimismSucker` |
-| [`BPArbitrumSucker`](https://github.com/Bananapus/nana-suckers/blob/master/src/BPArbitrumSucker.sol) | Ethereum Mainnet and Arbitrum | Uses the [Arbitrum Inbox](https://docs.arbitrum.io/build-decentralized-apps/cross-chain-messaging)
+| [`BPBaseSucker`](https://github.com/Bananapus/nana-suckers/blob/master/src/BPBaseSucker.sol)         | Ethereum Mainnet and Base     | A thin wrapper around `BPOptimismSucker`                                                                                                                                                             |
+| [`BPArbitrumSucker`](https://github.com/Bananapus/nana-suckers/blob/master/src/BPArbitrumSucker.sol) | Ethereum Mainnet and Arbitrum | Uses the [Arbitrum Inbox](https://docs.arbitrum.io/build-decentralized-apps/cross-chain-messaging)                                                                                                   |
 
 ## Bridging
 
@@ -64,7 +64,7 @@ Once this is called, the sucker:
 - Redeems the $OHIO using OhioDAO's primary ETH terminal.
 - Adds a new leaf to its ETH outbox tree.
 
-An "outbox tree" is part of what makes the suckers scale well – instead of sending a transaction for each token being bridged, the sucker stores a sparse merkle tree for each local to remote token mapping. We'll call the tree which tracks ETH claims "the ETH outbox tree". The `prepare(...)` function inserts a leaf into that tree, which is a keccak256 hash of the beneficiary's address, the number of project tokens which was redeemed, and the number of terminal tokens that were claimed by that redemption. Only the outbox tree's *root* needs to be bridged over. Users can claim their tokens on the remote chain by providing a proof that their leaf is in the tree, which gets verified against that root.
+An "outbox tree" is part of what makes the suckers scale well – instead of sending a transaction for each token being bridged, the sucker stores a sparse merkle tree for each local to remote token mapping. We'll call the tree which tracks ETH claims "the ETH outbox tree". The `prepare(...)` function inserts a leaf into that tree, which is a keccak256 hash of the beneficiary's address, the number of project tokens which was redeemed, and the number of terminal tokens that were claimed by that redemption. Only the outbox tree's _root_ needs to be bridged over. Users can claim their tokens on the remote chain by providing a proof that their leaf is in the tree, which gets verified against that root.
 
 To bridge the outbox root over, Jimmy calls `BPOptimismSucker.toRemote(...)`, which takes one argument – the token whose outbox tree should be bridged. Jimmy wants to bridge the ETH outbox tree, so he passes in `0x000000000000000000000000000000000000EEEe` (`JBConstants.NATIVE_TOKEN`). After a few minutes, the sucker will have bridged over the outbox root and the ETH it got by redeeming Jimmy's $OHIO. This calls the peer (on Optimism) sucker's `BPOptimismSucker.fromRemote(...)` function, and updates its ETH inbox tree with the new root.
 
@@ -119,19 +119,19 @@ The `juicerkle` service will return an array of `BPClaim` structs for each leaf 
 ```js
 [
   {
-    "Token": "0x000000000000000000000000000000000000eeee",
-    "Leaf": {
-      "Index": 0,
-      "Beneficiary": "0x1234...", // jimmy.eth
-      "ProjectTokenAmount": 1000000000000000000, // 1e18
-      "TerminalTokenAmount": 1000000000000000000 // 1e18
+    Token: "0x000000000000000000000000000000000000eeee",
+    Leaf: {
+      Index: 0,
+      Beneficiary: "0x1234...", // jimmy.eth
+      ProjectTokenAmount: 1000000000000000000, // 1e18
+      TerminalTokenAmount: 1000000000000000000, // 1e18
     },
-    "Proof": [
-        // proof in here
-    ]
-  }
+    Proof: [
+      // proof in here
+    ],
+  },
   // More claims...
-]  
+];
 ```
 
 Jimmy can pass this response to `BPOptimismSucker.claim(...)` to claim his $OHIO on Optimism. If the sucker's `ADD_TO_BALANCE_MODE` is set to `ON_CLAIM`, the ETH which Jimmy's $OHIO was redeemed for on Ethereum mainnet will immediately be added to the project's balance. Otherwise, it will be added once someone calls `BPOptimismSucker.addOutstandingAmountToBalance(...)`.
