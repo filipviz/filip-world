@@ -1,0 +1,6 @@
+{{- $url := urls.Parse ("/" | absURL) -}}
+# robots.txt file for "Filip's World" @ {{ $url.Host }}
+User-agent: *
+Allow: /
+Disallow:
+Sitemap: {{ "/sitemap.xml" | absURL }}

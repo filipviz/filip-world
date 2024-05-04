@@ -1,0 +1,98 @@
+# Site description. Used in meta description
+description: >-
+  Filip's personal website.
+
+# SEO keywords. Used in 'meta name="keywords"' tag.
+# May be overridden by .Keywords or .Tags in front matter.
+keywords:
+  - go
+  - golang
+  - juicebox
+
+# A "copyright"-line to be added to RSS/Atom files.
+# "&copy;" and "{year}" will be replaced by © and the current year.
+copyright: 'Copyright &copy; 2023-{year} Filip'
+
+# Colour scheme. Options: red, orange, magenta, cyan, blue, brown
+colorScheme: ''
+
+# Used in site header
+tagline: my notes on software, cryptocurrency, and ML
+
+# Custom footer text on left sidebar. Use HTMl if needed.
+# "&copy;" and "{year}" will be replaced by © and the current year.
+footer: >-
+  Built with <a href="https://github.com/sergeyklay/gohugo-theme-ed"
+  target="_blank" rel="noopener noreferrer">Ed</a>.
+
+# Sections to be displayed in:
+# - main page
+# - RSS/Atom/Json feeds
+# - search index
+# - ...
+mainSections:
+  - post
+
+# Posts date format, for example: 2006-01-02
+dateFormat: ':date_long'
+dateFormatToc: 2006-01-02
+
+# Show "Read more" button in list if true
+readmore: true
+
+# RSS/Atom feed size
+feedSize: 25
+
+recentPostsSize: 5
+
+# TODO: Site icons, relative to ./static
+assets:
+  # favicon.ico for legacy browsers
+  favicon: ''
+  # A single SVG icon with a light/dark version for modern browsers
+  svgicon: ''
+  # 180×180 PNG image for Apple devices
+  apple_touch_icon: ''
+  # Logo image, relative to ./assets
+  logo: /img/open-graph-logo.png
+  disable_fingerprinting: false
+
+author:
+  name: Filip V.
+  email: f@filip.world
+  github: filipviz
+  twitter: filipviz
+
+social:
+  twitter: filipviz
+
+# Configure search engine
+search:
+  # Maximum length (in words) of each text blurb. You can change this
+  # value if you find that 100 is too short or too long for your taste.
+  maxSummaryLength: 100
+  languages:
+    - en
+
+comments:
+  enable: false
+  type: giscus
+
+  # Configure giscus comments.
+  #
+  # For more see: https://giscus.app/
+  giscus:
+    # Required parameters:
+    repo:
+    repoId:
+    category:
+    categoryId:
+
+    # Optional parameters:
+    theme: light
+    mapping: pathname
+    strict: 0
+    reactionsEnabled: 1
+    emitMetadata: 0
+    inputPosition: bottom
+    lang: en
