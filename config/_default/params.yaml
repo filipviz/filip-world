@@ -23,7 +23,8 @@ tagline: my notes on software, cryptocurrency, and ML
 # "&copy;" and "{year}" will be replaced by © and the current year.
 footer: >-
   Built with <a href="https://github.com/sergeyklay/gohugo-theme-ed"
-  target="_blank" rel="noopener noreferrer">Ed</a>.
+  target="_blank" rel="noopener noreferrer">Ed</a> and
+  <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a>.
 
 # Sections to be displayed in:
 # - main page
@@ -46,9 +47,9 @@ feedSize: 25
 recentPostsSize: 5
 
 assets:
-  favicon: 'img/favicon.ico'
-  svgicon: 'img/icon.svg'
-  apple_touch_icon: 'img/apple_icon.png'
+  favicon: 'favicon.ico'
+  svgicon: 'icon.svg'
+  apple_touch_icon: 'apple-touch-icon.png'
   logo: /img/open-graph-logo.png
   disable_fingerprinting: false
 

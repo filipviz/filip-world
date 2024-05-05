@@ -242,7 +242,19 @@ In this example, the project owner `0x1234…` gives their new `BPSucker` at `0x
 
 Repeat this process on the other chain to deploy the peer sucker, and the project should be ready for bridging.
 
-<!-- ## Using the Relayer TODO -->
+## Using the Relayer
+
+_This tech is still under construction – expect this to change._
+
+Bridging from L1 to L2 is straightforward. Bridging from L2 to L1 usually requires an extra step to finalize the withdrawal, which is different for each L2. For OP Stack networks like Optimism or Base, this is the [withdrawal flow](https://docs.optimism.io/stack/protocol/withdrawal-flow):
+
+> 1.  The **withdrawal initiating transaction**, which the user submits on L2.
+> 2.  The **withdrawal proving transaction**, which the user submits on L1 to prove that the withdrawal is legitimate (based on a merkle patricia trie root that commits to the state of the L2ToL1MessagePasser's storage on L2)
+> 3.  The **withdrawal finalizing transaction**, which the user submits on L1 after the fault challenge period has passed, to actually run the transaction on L1.
+
+Users can do this manually, but it's a hassle. To simplify this process, 0xBA5ED wrote the [`bananapus-sucker-relayer`](https://github.com/Bananapus/bananapus-sucker-relayer), a tool which automatically proves and finalizes withdrawals from Optimism or Base to Ethereum mainnet. It listens for withdrawals and automatically completes the withdrawal process using [OpenZeppelin Defender](https://www.openzeppelin.com/defender).
+
+To use the relayer, project creators have to create an OpenZeppelin Defender account, set up a relayer through their dashboard, and fund it with ETH (to pay gas fees). This relayer is still in development, so expect changes.
 
 ## Resources
 

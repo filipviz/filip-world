@@ -5,10 +5,10 @@ main:
     url: /
     weight: 1
 
-  - identifier: search
-    name: Search
-    url: /search/
-    weight: 5
+#  - identifier: search
+#    name: Search
+#    url: /search/
+#    weight: 5
 
   - identifier: posts
     name: Posts
