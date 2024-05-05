@@ -1,14 +1,14 @@
 # For more see https://gohugo.io/content-management/menus/
-main:                
+main:
   - identifier: home
     name: Home
     url: /
     weight: 1
 
-#  - identifier: search
-#    name: Search
-#    url: /search/
-#    weight: 5
+  #  - identifier: search
+  #    name: Search
+  #    url: /search/
+  #    weight: 5
 
   - identifier: posts
     name: Posts
@@ -17,14 +17,14 @@ main:
 
   - identifier: github
     name: GitHub
-    url: 'https://github.com/filipviz/'
+    url: "https://github.com/filipviz/"
     weight: 20
     params:
       external: true
 
   - identifier: twitter
     name: Twitter/X
-    url: 'https://x.com/filipviz/'
+    url: "https://x.com/filipviz/"
     weight: 25
     params:
       external: true

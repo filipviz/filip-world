@@ -118,22 +118,14 @@ struct BPLeaf {
 }
 ```
 
-These claims can be difficult for integrators to put together – they would have to track every insertion and build merkle proofs for each one. To make this easier, I wrote the [`juicerkle`](https://github.com/Bananapus/juicerkle) service which returns all of the available claims for a specific beneficiary. To use it, `POST` a claims request to `/claims`:
+These claims can be difficult for integrators to put together – they would have to track every insertion and build merkle proofs for each one. To make this easier, I wrote the [`juicerkle`](https://github.com/Bananapus/juicerkle) service which returns all of the available claims for a specific beneficiary. To use it, `POST` a json request to `/claims`:
 
-```go
-// Schema for incoming claims requests
-type ClaimsRequest struct {
-	ChainId     *big.Int       `json:"chainId"`
-	Sucker      common.Address `json:"sucker"`
-	Token       common.Address `json:"token"`
-	Beneficiary common.Address `json:"beneficiary"`
-}
-```
-
-- `ChainId` is the network ID for the sucker contract we're claiming from.
-- `Sucker` is the address of the sucker contract we're claiming from.
-- `Token` is the address of the terminal token whose inbox tree we're claiming from.
-- `Beneficiary` is the address of the beneficiary we're getting the available claims for.
+| Field         | JS Type  | Description                                                                |
+| ------------- | -------- | -------------------------------------------------------------------------- |
+| `chainId`     | `int`    | The network ID for the sucker contract being claimed from.                 |
+| `sucker`      | `string` | The address of the sucker being claimed from.                              |
+| `token`       | `string` | The address of the terminal token whose inbox tree is being claimed from. |
+| `beneficiary` | `string` | The address of the beneficiary we're getting the available claims for.     |
 
 Jimmy's claims request looks like this:
 
@@ -159,7 +151,16 @@ The `chainId` is Optimism's network ID. Jimmy's getting his claims for the ETH i
       TerminalTokenAmount: 1000000000000000000, // 1e18
     },
     Proof: [
-      // proof in here
+      [
+        229, 206, 51, 48, 16, 242, 169, 29, 47, 33, 39, 105, 34, 55, 172, 232,
+        217, 243, 168, 149, 38, 202, 133, 68, 191, 119, 165, 97, 59, 232, 212,
+        14
+      ],
+      [
+        33, 40, 178, 36, 156, 7, 175, 252, 47, 196, 238, 239, 170, 52, 239, 153,
+        66, 111, 173, 24, 113, 164, 25, 185, 54, 47, 170, 32, 232, 56, 97, 254
+      ],
+      // More 32-byte chunks…
     ],
   },
   // More claims…

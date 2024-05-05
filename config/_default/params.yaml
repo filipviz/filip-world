@@ -11,10 +11,10 @@ keywords:
 
 # A "copyright"-line to be added to RSS/Atom files.
 # "&copy;" and "{year}" will be replaced by © and the current year.
-copyright: 'Copyright &copy; 2023-{year} Filip'
+copyright: "Copyright &copy; 2023-{year} Filip"
 
 # Colour scheme. Options: red, orange, magenta, cyan, blue, brown
-colorScheme: ''
+colorScheme: ""
 
 # Used in site header
 tagline: my notes on software, cryptocurrency, and ML
@@ -35,7 +35,7 @@ mainSections:
   - post
 
 # Posts date format, for example: 2006-01-02
-dateFormat: ':date_long'
+dateFormat: ":date_long"
 dateFormatToc: 2006-01-02
 
 # Show "Read more" button in list if true
@@ -47,9 +47,9 @@ feedSize: 25
 recentPostsSize: 5
 
 assets:
-  favicon: 'favicon.ico'
-  svgicon: 'icon.svg'
-  apple_touch_icon: 'apple-touch-icon.png'
+  favicon: "favicon.ico"
+  svgicon: "icon.svg"
+  apple_touch_icon: "apple-touch-icon.png"
   logo: /img/open-graph-logo.png
   disable_fingerprinting: false
 
@@ -76,10 +76,10 @@ comments:
   # For more see: https://giscus.app/
   giscus:
     # Required parameters:
-    repo: 'filipviz/filip-world'
-    repoId: 'R_kgDOL26BYw'
-    category: 'Announcements'
-    categoryId: 'DIC_kwDOL26BY84CfJOL'
+    repo: "filipviz/filip-world"
+    repoId: "R_kgDOL26BYw"
+    category: "Announcements"
+    categoryId: "DIC_kwDOL26BY84CfJOL"
 
     # Optional parameters:
     theme: light

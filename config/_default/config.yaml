@@ -132,13 +132,13 @@ markup:
 frontmatter:
   lastmod:
     - lastmod
-    - ':git'
+    - ":git"
     - date
     - publishDate
 
 module:
   hugoVersion:
     extended: true
-    min: '0.114.0'
+    min: "0.114.0"
   imports:
-    - path: github.com/sergeyklay/gohugo-theme-ed
+    - path: "github.com/sergeyklay/gohugo-theme-ed"
