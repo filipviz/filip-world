@@ -6,7 +6,7 @@ tags: ["machine learning"]
 
 ## The Problem
 
-On-device models are becoming more popular, but by default, applications store them in different places.
+On-device AI models are becoming more common, but by default, applications store them in different places.
 
 | Application | Default | How to Change |
 | --- | --- | --- |
@@ -16,11 +16,11 @@ On-device models are becoming more popular, but by default, applications store t
 | [Jan](https://jan.ai) | `~/jan/models` | Advanced Settings -> Jan Data Folder |
 | [GPT4All](https://gpt4all.io/index.html) | `~/.cache/gpt4all/` | Unclear |
 
-These applications (and new ones which will come) are becoming popular with non-technical audiences. Someone who tries one of these applications is more likely to try another. When they do, they'll be confused – their models are missing!
+These applications (and new ones which will come) are becoming popular with non-technical audiences. A user who tries one of these applications is more likely to try another. When they do, they'll be confused – their models are missing!
 
-Unless they realize that they have to change the default models directory, the friction of downloading 10+ GB of weights comes *before they can use your application*. Many users—especially those with slow internet connections—will give up at this point.
+Unless they realize that they have to change the default models directory, the friction of downloading 10+ GB of weights comes *before they can try the application*. At this point, many users—especially those with slow internet connections—will give up.
 
-Technical users are even more likely to already have models on their device. Although they can figure something like this out, it adds friction.
+Technical users are likely to already have models on their device. Although they can figure something like this out, it adds friction.
 
 ## The Solution
 
@@ -28,12 +28,8 @@ By agreeing to save AI models to a standard path, developers could simplify thin
 
 My suggestion:
 
-Applications which run AI models on-device should save them within `$MODELPATH`.
-
-`$MODELPATH` should default to `~/.models` on Unix and `%USERPROFILE%\.models` on Windows.
-
-Models should be saved to `$MODELPATH/<provider-url>/<author>/<model>/`.
+Applications which run AI models on-device should save them within `$MODELPATH`. `$MODELPATH` should default to `~/.models` on Unix and `%USERPROFILE%\.models` on Windows.
 
 `$MODELPATH` should be read-only. Per-model config files should be stored somewhere else.
 
-For example – if a user installs [`meta-llama/Meta-Llama-3-8B`](https://huggingface.co/meta-llama/Meta-Llama-3-8B) from HuggingFace, the model should be saved inside `$MODELPATH/huggingface.co/meta-llama/Meta-Llama-3-8B/`.
+Models should be saved to `$MODELPATH/<provider-url>/<author>/<model>/`. For example – if a user installs [`meta-llama/Meta-Llama-3-8B`](https://huggingface.co/meta-llama/Meta-Llama-3-8B) from HuggingFace, the model should be saved to `$MODELPATH/huggingface.co/meta-llama/Meta-Llama-3-8B/`.
