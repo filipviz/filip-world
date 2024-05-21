@@ -1,7 +1,7 @@
 ---
 title: Local LLMs
 date: 2023-09-24
-tags: ["llm", "ai"]
+tags: ["machine learning"]
 ---
 
 I wrote this guide for a friend interested in running large language models locally in September 2023, and parts of it are out of date – things change quickly. If you're reading it and run into questions feel free to email me: f (at) filip.world.
