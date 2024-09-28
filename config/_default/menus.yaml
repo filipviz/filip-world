@@ -23,7 +23,7 @@ main:
       external: true
 
   - identifier: twitter
-    name: Twitter/X
+    name: X
     url: "https://x.com/filipviz/"
     weight: 25
     params:

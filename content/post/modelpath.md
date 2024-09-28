@@ -1,5 +1,5 @@
 ---
-title: Please use $MODELPATH
+title: Use $MODELPATH
 date: 2024-05-21
 tags: ["machine learning"]
 ---
@@ -30,6 +30,6 @@ My suggestion:
 
 Applications which run AI models on-device should save them within `$MODELPATH`. `$MODELPATH` should default to `~/.models` on Unix and `%USERPROFILE%\.models` on Windows.
 
-`$MODELPATH` should be read-only. Per-model config files should be stored somewhere else.
+Aside from new model downloads, `$MODELPATH` should be read-only. Per-model config files should be stored somewhere else.
 
 Models should be saved to `$MODELPATH/<provider-url>/<author>/<model>/`. For example – if a user installs [`meta-llama/Meta-Llama-3-8B`](https://huggingface.co/meta-llama/Meta-Llama-3-8B) from HuggingFace, the model should be saved to `$MODELPATH/huggingface.co/meta-llama/Meta-Llama-3-8B/`.

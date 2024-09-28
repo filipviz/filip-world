@@ -1,6 +1,6 @@
 # Site description. Used in meta description
 description: >-
-  Filip's personal website.
+  Filip's World – my personal website.
 
 # SEO keywords. Used in 'meta name="keywords"' tag.
 # May be overridden by .Keywords or .Tags in front matter.
@@ -17,12 +17,12 @@ copyright: "Copyright &copy; 2023-{year} Filip"
 colorScheme: ""
 
 # Used in site header
-tagline: my notes on software, cryptocurrency, and ML
+tagline: Irrevocable is my word and shall not fail.
 
 # Custom footer text on left sidebar. Use HTMl if needed.
 # "&copy;" and "{year}" will be replaced by © and the current year.
 footer: >-
-  Built with <a href="https://github.com/sergeyklay/gohugo-theme-ed"
+  Made with <a href="https://github.com/sergeyklay/gohugo-theme-ed"
   target="_blank" rel="noopener noreferrer">Ed</a> and
   <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a>.
 
