@@ -5,9 +5,11 @@ description: >-
 # SEO keywords. Used in 'meta name="keywords"' tag.
 # May be overridden by .Keywords or .Tags in front matter.
 keywords:
+  - filipviz
+  - filip world
+  - juicebox
   - go
   - golang
-  - juicebox
 
 # A "copyright"-line to be added to RSS/Atom files.
 # "&copy;" and "{year}" will be replaced by © and the current year.
@@ -17,7 +19,8 @@ copyright: "Copyright &copy; 2023-{year} Filip"
 colorScheme: ""
 
 # Used in site header
-tagline: The sun is new each day.
+tagline: Man's character is his fate.
+# The sun is new every day.
 
 # Custom footer text on left sidebar. Use HTMl if needed.
 # "&copy;" and "{year}" will be replaced by © and the current year.

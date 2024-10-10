@@ -8,6 +8,8 @@ tags: ["machine learning"]
 
 On-device AI models are becoming more common, but by default, applications store them in different places.
 
+<!--more-->
+
 | Application | Default | How to Change |
 | --- | --- | --- |
 | [HuggingFace Transformers](https://huggingface.co/docs/transformers/main/en/index) | `~/.cache/huggingface/hub` | Set `TRANSFORMERS_CACHE` |
